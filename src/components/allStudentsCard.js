@@ -12,19 +12,15 @@ const studentToAdd = {
     "campusId": 1
 }
 
-const AppView = (props) => {
-    const {students, removeStudent, addStudent } = props;
-
-    
-
+function allStudentsCard ({firstName, lastName, image, gpa}) {
     return (
-    <div className="App">
-        <header className="App-header">
-            <h1>All Students</h1>
-            {students.map(student => <div><img src={student.imageUrl} width="100" height="100" onClick={() => addStudent(studentToAdd)}></img></div>)}
-        </header>
-    </div>
-    )
+        <div className = "Card">
+            <img src = {image}></img>
+            {firstName}
+            {lastName}
+            {gpa}
+        </div>
+    );
 }
 
-export default AppView;
+export default allStudentsCard;
