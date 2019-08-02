@@ -1,0 +1,33 @@
+.Card {
+    background-color: #fff;
+    margin-bottom: 10px;
+    width: 300px;
+    border: #000;
+    box-shadow: 0 2px 4px rgba(141,149,166,0.5);
+    flex-basis: 21%;
+}
+
+.top{
+    display: flex;
+}
+img{
+    width: 100px;
+    height: 100px;
+    display: block;
+}
+
+.bottom {
+    position: relative;
+}
+
+.left{
+    position: absolute;
+    bottom: 0;
+    left: 100px;
+}
+
+.right{
+    position: absolute;
+    bottom: 0;
+    right:5px;
+}
