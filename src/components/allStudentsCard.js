@@ -1,4 +1,5 @@
 import React from "react";
+import "../styles/allStudentsCard.css"
 
 const studentToAdd = {
     "id": 2,
@@ -12,15 +13,25 @@ const studentToAdd = {
     "campusId": 1
 }
 
-function allStudentsCard ({firstName, lastName, image, gpa}) {
+const StudentsCard = (props) => {
+    const {students, removeStudent, addStudent } = props;
     return (
         <div className = "Card">
-            <img src = {image}></img>
-            {firstName}
-            {lastName}
-            {gpa}
+            <div className = "button">
+            <button onClick = {() => addStudent(studentToAdd)}>Add Student</button>
+            </div>
+            <div className = "main-cards">
+            {students.map(student => 
+            <div><img src={student.imageUrl} width="100" height="100" onClick = {() => removeStudent(student.id)}></img>
+                {student.firstName}
+                {student.lastName}
+                {student.gpa}
+            </div>
+            )}
+            </div>
+            
         </div>
     );
 }
 
-export default allStudentsCard;
+export default StudentsCard;

@@ -1,10 +1,15 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import Card from "../components/allStudentsCard"
+import StudentsCard from "../components/allStudentsCard"
 import { fetchStudentsThunk, removeStudentThunk, addStudentThunk } from "../store/utilities/allStudents";
-// import "./allStudents.css";
+import '../styles/allStudents.css'
 
 class allStudents extends Component {
+    constructor() {
+        super();
+        this.state = {
+        }
+      }
 
     componentDidMount() {
         this.props.fetchAllStudents();
@@ -18,21 +23,14 @@ class allStudents extends Component {
         this.props.addStudent(student);
     }
 
-    display = () => {
-        this.props.students.map(student => {
-            return (
-                <Card firstName={student.firstName}
-                    lastName={student.lastName}
-                    image={student.imageURL}
-                    gpa={student.gpa}
-                    />
-            )
-        })
-    }
-
     render() {
         return (
-            <Card students={this.props.students} removeStudent={this.props.removeStudent} addStudent={this.props.addStudent} />
+            <div className = "main">
+                <div className = "title"><h1>List of Students</h1></div>
+                <div className = "card">
+                    <StudentsCard students={this.props.students} removeStudent={this.removeStudent} addStudent={this.addStudent} />
+                </div>
+            </div>
         );
     }
 }
