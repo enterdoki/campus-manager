@@ -1,20 +1,22 @@
 import React from 'react';
 import '../styles/CampusCard.css';
 
-function CampusCard ({image,campus}){
+function CampusCard ({image,campus,id,deleteCampus}){
     console.log(image)
     return(
         <div className="Card">
-            <div className="top">
+            <div className="image">
                 <img src={image}></img>
-                {campus}
             </div>
             <div className="bottom">
-                <div className="left">
+                <div className="top-left">
+                    {campus}
+                </div>
+                <div className="bottom-left">
                     Edit
                 </div>
-                <div className="right">
-                    Delete
+                <div className="bottom-right">
+                    <button onClick={()=>deleteCampus(id)}>Delete</button>
                 </div>
             </div>
         </div>

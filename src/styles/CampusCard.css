@@ -6,9 +6,10 @@
     flex-basis: 21vw;
 }
 
-.top{
+.image{
     display: flex;
 }
+
 img{
     width: 100px;
     height: 100px;
@@ -19,14 +20,20 @@ img{
     position: relative;
 }
 
-.left{
+.bottom-left{
     position: absolute;
-    bottom: 0;
-    left: 100px;
+    bottom: 5px;
+    left: 105px;
 }
 
-.right{
+.bottom-right{
     position: absolute;
-    bottom: 0;
+    bottom:5px;
     right:5px;
+}
+
+.top-left{
+    position: absolute;
+    bottom: 75px;
+    left: 105px;
 }
