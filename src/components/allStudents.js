@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import AppView from "../AppView";
+import Card from "../components/allStudentsCard"
 import {fetchStudentsThunk, removeStudentThunk, addStudentThunk} from "../store/utilities/allStudents";
 // import "./allStudents.css";
 
@@ -20,7 +20,7 @@ class allStudents extends Component {
 
     render() {
         return (
-            <AppView students = {this.props.students} removeStudent = {this.props.removeStudent} addStudent = {this.props.addStudent} />
+            <Card students = {this.props.students} removeStudent = {this.props.removeStudent} addStudent = {this.props.addStudent} />
         );
     }
 }
