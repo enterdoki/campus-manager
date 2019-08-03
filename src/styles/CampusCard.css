@@ -37,3 +37,11 @@ img{
     bottom: 75px;
     left: 105px;
 }
+
+a{
+    color: black;
+    text-decoration: none; 
+}
+a:hover{
+    text-decoration: underline;
+}
