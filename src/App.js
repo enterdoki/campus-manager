@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {BrowserRouter as Router, Route,Switch} from 'react-router-dom';
+import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 import AllCampus from './components/allCampus'
 import AllStudents from './components/allStudents'
 import SingleCampus from './components/singleCampus';
