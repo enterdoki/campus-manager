@@ -2,7 +2,9 @@ import React, { Component } from 'react';
 
 // Additional Redux store imports;
 import { connect } from "react-redux";
-import {fetchAllCampusThunk} from '../store/utilities/allCampus';
+import {fetchAllCampusThunk, deleteCampusThunk} from '../store/utilities/allCampus';
+import CampusCard from './CampusCard';
+import '../styles/allCampus.css'
 
 class allCampus extends Component {
   constructor() {
@@ -15,10 +17,28 @@ class allCampus extends Component {
     this.props.fetchAllCampus();
   }
 
+  display = () =>(
+    this.props.allCampus.map(item=>{
+      return (
+        <CampusCard
+        image={item.imageUrl}
+        campus={item.campus}
+        id={item.campusId}
+        deleteCampus={this.props.deleteCampus}
+        />
+      )
+    })
+  )
+
   render() {
     return (
         <div>
-          <p>hi</p>
+          <h1>Campus Listing</h1>
+          <div className="wrap">
+            <div className="display">
+              {this.display()}
+            </div>
+          </div>
         </div>
     )
   }
@@ -26,13 +46,14 @@ class allCampus extends Component {
 
 const mapState = (state) => {
   return {
-    students :state.allCampus
+    allCampus :state.allCampus
   }
 }
 
 const mapDispatch = (dispatch) => {
   return {
-    fetchAllCampus: () => dispatch(fetchAllCampusThunk())
+    fetchAllCampus: () => dispatch(fetchAllCampusThunk()),
+    deleteCampus: (id) => dispatch(deleteCampusThunk(id))
   }
 }
 

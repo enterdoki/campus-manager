@@ -1,0 +1,49 @@
+.Card {
+    background-color: #fff;
+    margin-bottom: 10px;
+    border: #000;
+    box-shadow: 0 2px 4px rgba(141,149,166,0.5);
+    max-width: 300px;
+    width: 33%;
+    flex-basis: 21vw;
+}
+
+.image{
+    display: flex;
+}
+
+img{
+    width: 100px;
+    height: 100px;
+    display: block;
+}
+
+.bottom {
+    position: relative;
+}
+
+.bottom-left{
+    position: absolute;
+    bottom: 5px;
+    left: 105px;
+}
+
+.bottom-right{
+    position: absolute;
+    bottom:5px;
+    right:5px;
+}
+
+.top-left{
+    position: absolute;
+    bottom: 75px;
+    left: 105px;
+}
+
+a{
+    color: black;
+    text-decoration: none; 
+}
+a:hover{
+    text-decoration: underline;
+}

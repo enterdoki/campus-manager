@@ -1,10 +1,23 @@
 const FETCH_CAMPUS = "FETCH_CAMPUS";
+const DELETE_CAMPUS = "DELETE_CAMPUS";
 
 const fetchAllCampus = (campus) => {
     return{
         type: FETCH_CAMPUS,
         payload: campus
     }
+}
+
+const removeCampus = (id) =>{
+    console.log(id)
+    return{
+        type: DELETE_CAMPUS,
+        payload: id
+    }
+}
+
+export const deleteCampusThunk = (id) => (dispatch) =>{
+    dispatch(removeCampus(id));
 }
 
 export const fetchAllCampusThunk = () => (dispatch) =>{
@@ -62,6 +75,8 @@ export default (state = [], action) =>{
     switch(action.type){
         case FETCH_CAMPUS:
             return action.payload;
+        case DELETE_CAMPUS:
+            return state.filter(campus=>campus.campusId !== action.payload)
         default:
             return state;
     }
