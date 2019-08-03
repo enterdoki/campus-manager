@@ -22,9 +22,10 @@ const StudentsCard = (props) => {
             </div>
                 {students.map(student => 
                 <div className = "main-cards">
-                    <li><img src={student.imageUrl} width="100" height="100"></img></li>
-                    <li>{student.firstName} {student.lastName} {student.gpa}</li>
-                    <li><button onClick = {() => removeStudent(student.id)}>Remove</button></li>
+                    <tr><img src={student.imageUrl} width="100" height="100"></img> {student.firstName} {student.lastName}
+                        <td> {student.gpa}</td>
+                     <td><button onClick = {() => removeStudent(student.id)}>Remove</button></td>
+                     </tr>
                 </div>
             )}
               
