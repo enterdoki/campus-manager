@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import {Link} from 'react-router-dom';
 
 // Additional Redux store imports;
 import { connect } from "react-redux";
@@ -33,7 +34,8 @@ class allCampus extends Component {
   render() {
     return (
         <div>
-          <h1>Campus Listing</h1>
+          <div className = "title"><h1>Campus Listing</h1></div>
+            <Link to="/students"><button>Students</button></Link>
           <div className="wrap">
             <div className="display">
               {this.display()}

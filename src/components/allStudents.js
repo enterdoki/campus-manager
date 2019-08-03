@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import {Link} from 'react-router-dom';
 import StudentsCard from "../components/allStudentsCard"
 import { fetchStudentsThunk, removeStudentThunk, addStudentThunk } from "../store/utilities/allStudents";
 import '../styles/allStudents.css'
+
 
 class allStudents extends Component {
     constructor() {
@@ -23,12 +25,30 @@ class allStudents extends Component {
         this.props.addStudent(student);
     }
 
+    display = () =>(
+        this.props.students.map(item=>{
+          return (
+            <StudentsCard
+            image={item.imageUrl}
+            firstName={item.firstName}
+            id={item.id}
+            lastName={item.lastName}
+            removeStudent={this.props.removeStudent}
+            />
+          )
+        })
+      )
+
     render() {
+        
+
         return (
             <div className = "main">
-                <div className = "title"><h1>List of Students</h1></div>
+                <div className = "title"><h1>Students</h1></div>
+                <Link to="/"><button>Campuses</button></Link>
+                <button onClick = {() => this.addStudent(studentToAdd)}>Add Student</button>
                 <div className = "card">
-                    <StudentsCard students={this.props.students} removeStudent={this.removeStudent} addStudent={this.addStudent} />
+                    {this.display()}
                 </div>
             </div>
         );
@@ -47,6 +67,18 @@ const mapDispatch = (dispatch) => {
         removeStudent: (id) => dispatch(removeStudentThunk(id)),
         addStudent: (student) => dispatch(addStudentThunk(student))
     }
+}
+
+const studentToAdd = {
+    "id": 2,
+    "firstName": "bob",
+    "lastName": "jones",
+    "email": "bobbyboy1234@yahoo.com",
+    "imageUrl": "https://i.imgur.com/GuAB8OE.jpg",
+    "gpa": 3.7,
+    "createdAt": "2018-12-05T23:02:45.270Z",
+    "updatedAt": "2019-06-14T00:15:35.429Z",
+    "campusId": 1
 }
 
 export default connect(mapState, mapDispatch)(allStudents);

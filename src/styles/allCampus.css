@@ -15,3 +15,11 @@ h1{
     margin-right: auto;
     width: 70%;
 }
+
+.title {
+    background-color: #003399;
+    color: white;
+    font-size: 1.05rem;
+    margin: 0;
+    padding: 0rem;
+}

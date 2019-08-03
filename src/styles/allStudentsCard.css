@@ -1,16 +1,9 @@
-.button {
-    text-align: center
-}
-
-.main-cards {
-    background-color: aliceblue;
+/* .main-cards {
     margin-bottom: 10px;
     border: #000;
     box-shadow: 0 2px 4px rgba(141,149,166,0.5);
+    max-width: 300px;
+    width: 33%;
     flex-basis: 21vw;
-    float: left;
-}
+} */
 
-td {
-    display: inline;
-}
