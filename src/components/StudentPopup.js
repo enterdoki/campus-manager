@@ -102,9 +102,20 @@ class StudentPopup extends Component {
                     onClick={this.props.closePopup}
                     style = {{position: "absolute",
                         bottom: 5,
-                        right: 5}}
+                        right: 105}}
                     >
                         Submit
+                    </Button>
+                    <Button
+                    variant="contained"
+                    size="large"
+                    color="primary"
+                    onClick={this.props.closePopup}
+                    style = {{position: "absolute",
+                        bottom: 5,
+                        right: 5}}
+                    >
+                        Close
                     </Button>
                 </div>
                 
