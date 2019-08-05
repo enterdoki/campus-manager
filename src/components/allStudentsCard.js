@@ -1,31 +1,51 @@
-import React from "react";
+import React, {Component} from "react";
 import {Link} from 'react-router-dom';
+import Popup from "./StudentPopup";
 import "../styles/allStudentsCard.css"
 
+class StudentsCard extends Component { 
+    constructor(props){  
+        super(props);  
+        this.state = { 
+            showPopup: false 
+        };  
+    }  
 
-function StudentsCard ({image,firstName, lastName, id,removeStudent}){
-    console.log(image)
-    return(
-        <div className="Card">
-            <div className="image">
-                <img src={image}></img>
-            </div>
-            <div className="bottom">
-                <div className="top-left">
-                    <Link to={`/students/${id}`}>
-                        {firstName} {lastName}
+    handlePopup = () => {
+        this.setState({
+            showPopup: !this.state.showPopup
+        });
+    }
+    render () {
+        return(
+            <div className="Card">
+                <div className="image">
+                    <Link to={`/campus/${this.props.campusId}`}>
+                        <img src={this.props.image}></img>
                     </Link>
-                    
                 </div>
-                <div className="bottom-left">
-                    Edit
-                </div>
-                <div className="bottom-right">
-                    <button onClick={()=>removeStudent(id)}>Delete</button>
+                <div className="bottom">
+                    <div className="top-left">
+                        <Link to={`/students/${this.props.id}`}>
+                            {this.props.firstName} {this.props.lastName}
+                        </Link>
+                        
+                    </div>
+                    <div className="bottom-left">
+                        <button onClick={this.handlePopup}>Edit</button>  
+                        {this.state.showPopup ? (
+                            <Popup firstName = {this.props.firstName} lastName = {this.props.lastName}  closePopup={this.handlePopup}/>
+                        ): (null) }
+                        
+                    </div>
+                    <div className="bottom-right">
+                        <button onClick={()=>this.props.removeStudent(this.props.id)}>Delete</button>
+                    </div>
                 </div>
             </div>
-        </div>
-    )
+        )
+    }
+    
 }
 
 export default StudentsCard;
