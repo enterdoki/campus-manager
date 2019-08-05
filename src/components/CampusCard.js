@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import '../styles/CampusCard.css';
 import {Link} from 'react-router-dom';
-
+import PopUp from './PopUp';
 
 function CampusCard ({image,campus,id,deleteCampus}){
+    const [clicked, setClicked] = useState(false);
     console.log(image)
     return(
         <div className="Card">
@@ -17,7 +18,13 @@ function CampusCard ({image,campus,id,deleteCampus}){
                     </Link>
                 </div>
                 <div className="bottom-left">
-                    Edit
+                    <button onClick={() => setClicked(true)}>Edit</button>
+                    {clicked? (<div>
+                        <PopUp
+                        close={() => setClicked(false)}
+                        campus={campus} 
+                        />
+                    </div>):(<div></div>)}
                 </div>
                 <div className="bottom-right">
                     <button onClick={()=>deleteCampus(id)}>Delete</button>
