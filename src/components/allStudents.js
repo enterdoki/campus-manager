@@ -10,6 +10,7 @@ class allStudents extends Component {
     constructor() {
         super();
         this.state = {
+            
         }
       }
 
@@ -31,17 +32,17 @@ class allStudents extends Component {
             <StudentsCard
             image={item.imageUrl}
             firstName={item.firstName}
-            id={item.id}
             lastName={item.lastName}
+            id={item.id}
+            campusId = {item.campusId}
             removeStudent={this.props.removeStudent}
+            
             />
           )
         })
       )
 
     render() {
-        
-
         return (
             <div className = "main">
                 <div className = "title"><h1>Students</h1></div>
