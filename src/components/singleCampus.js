@@ -13,7 +13,7 @@ class SingleCampus extends Component {
       try{
         let {data} = await axios.get(`https://campus-manager-api.herokuapp.com/campuses/${this.props.match.params.id}`)
         this.setState({
-          campus:data
+          campus:data[0]
         })
         console.log(data)
       }
