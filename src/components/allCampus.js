@@ -48,11 +48,10 @@ class allCampus extends Component {
   handleNew = (event) =>{
     event.preventDefault();
     const arr= {
-      "id":parseInt(this.state.id),
       "name":this.state.name,
       "address":this.state.address,
       "description":this.state.description,
-      "imgUrl": "https://www.fullstackacademy.com/images/fa-logo.png"
+      "image": "https://www.fullstackacademy.com/images/fa-logo.png"
     }
     console.log(arr);
     this.props.addCampus(arr);
@@ -65,7 +64,7 @@ class allCampus extends Component {
         "name":this.state.name,
         "address":this.state.address,
         "description":this.state.description,
-        "imgUrl": "https://www.fullstackacademy.com/images/fa-logo.png"
+        "image": "https://www.fullstackacademy.com/images/fa-logo.png"
     }
     this.props.editCampus(id,arr);
     console.log(arr);

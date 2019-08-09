@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import {Link} from 'react-router-dom';
 import StudentsCard from "../components/allStudentsCard"
-import { fetchStudentsThunk, removeStudentThunk, addStudentThunk } from "../store/utilities/allStudents";
+import { fetchAllStudentsThunk, removeStudentThunk, addStudentThunk } from "../store/utilities/allStudents";
 import '../styles/allStudents.css'
 
 
@@ -30,13 +30,12 @@ class allStudents extends Component {
         this.props.students.map(item=>{
           return (
             <StudentsCard
-            image={item.imageUrl}
-            firstName={item.firstName}
-            lastName={item.lastName}
+            image={item.image}
+            firstName={item.firstname}
+            lastName={item.lastname}
             id={item.id}
-            campusId = {item.campusId}
+            campusId = {item.campusid}
             removeStudent={this.props.removeStudent}
-            
             />
           )
         })
@@ -64,7 +63,7 @@ const mapState = (state) => {
 
 const mapDispatch = (dispatch) => {
     return {
-        fetchAllStudents: () => dispatch(fetchStudentsThunk()),
+        fetchAllStudents: () => dispatch(fetchAllStudentsThunk()),
         removeStudent: (id) => dispatch(removeStudentThunk(id)),
         addStudent: (student) => dispatch(addStudentThunk(student))
     }
@@ -72,14 +71,10 @@ const mapDispatch = (dispatch) => {
 
 const studentToAdd = {
     "id": 2,
-    "firstName": "bob",
-    "lastName": "jones",
+    "firstname": "bob",
+    "lastname": "jones",
     "email": "bobbyboy1234@yahoo.com",
-    "imageUrl": "https://i.imgur.com/GuAB8OE.jpg",
-    "gpa": 3.7,
-    "createdAt": "2018-12-05T23:02:45.270Z",
-    "updatedAt": "2019-06-14T00:15:35.429Z",
-    "campusId": 1
+    "image": "https://i.imgur.com/GuAB8OE.jpg",
 }
 
 export default connect(mapState, mapDispatch)(allStudents);

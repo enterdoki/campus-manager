@@ -30,13 +30,6 @@ function PopUp ({close,submit,handleChange}){
               margin="normal"
               variant="outlined"
             />
-            <TextField
-              helperText="Please CampusId"
-              label="CampusId"
-              onChange={handleChange("id")}
-              margin="normal"
-              variant="outlined"
-            />
             <div className="button">
               <button type="submit" value="Submit">Submit</button>
               <button onClick={close}>Close</button>

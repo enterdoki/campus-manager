@@ -27,7 +27,7 @@ class SingleCampus extends Component {
         <div className="container">
             <h1>{campus.name}</h1>
             <div className="img">
-              <img src={campus.imgUrl}></img>
+              <img src={campus.image}></img>
             </div>
             <div className="description">
               <p>{campus.description}</p>

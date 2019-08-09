@@ -35,8 +35,8 @@ const editCampus = (arr) => {
 
 export const deleteCampusThunk = (id) => async(dispatch) =>{
     try{
-        let data = await axios.delete(`https://campus-manager-api.herokuapp.com/campuses/${id}`);
-        dispatch(removeCampus(data.data));
+        await axios.delete(`https://campus-manager-api.herokuapp.com/campuses/${id}`);
+        dispatch(removeCampus(id));
     }catch(err){
         console.log(err);
     }
@@ -44,8 +44,9 @@ export const deleteCampusThunk = (id) => async(dispatch) =>{
 
 export const addCampusThunk = (arr) => async(dispatch) =>{
     try{
-        let data = await axios.post("https://campus-manager-api.herokuapp.com/campuses",arr);
-        dispatch(addCampus(data.data));
+        let {data} = await axios.post("https://campus-manager-api.herokuapp.com/campuses",arr);
+        let campus = await data
+        dispatch(addCampus(campus));
         console.log(data);
     }
     catch(err){
@@ -67,7 +68,7 @@ export const fetchAllCampusThunk = () => async(dispatch) =>{
 export const editCampusThunk = (id,arr) =>async(dispatch)=>{
     try{
         let data = await axios.put(`https://campus-manager-api.herokuapp.com/campuses/${id}`,arr);
-        dispatch(editCampus(data.data));
+        dispatch(editCampus(arr));
         console.log(data);
     }catch(err){
         console.log(err);
@@ -79,11 +80,11 @@ export default (state = [], action) =>{
         case FETCH_CAMPUS:
             return action.payload;
         case DELETE_CAMPUS:
-            return action.payload;
+            return state.filter(item => item.id !== action.payload);
         case ADD_CAMPUS:
             return [...state, action.payload];
         case EDIT_CAMPUS:
-            return action.payload;
+            return [...state.filter(item => item.id !== action.payload.id), action.payload];
         default:
             return state;
     }

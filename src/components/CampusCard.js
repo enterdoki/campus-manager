@@ -12,7 +12,7 @@ function CampusCard ({campus,deleteCampus,handleChange,handleSubmit}){
     return(
         <div className="Card">
             <div className="image">
-                <img src={campus.imgUrl}></img>
+                <img src={campus.image}></img>
             </div>
             <div className="bottom">
                 <div className="top-left">
