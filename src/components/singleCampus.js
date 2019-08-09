@@ -1,16 +1,40 @@
 import React, {Component} from 'react';
+import axios from 'axios';
+import '../styles/singleCampus.css'
 
 class SingleCampus extends Component {
-    // componentDidMount () {
-    //     const { handle } = this.props.match.params
-    //     const { campus } = this.props.location.state
-    //     console.log(handle)
-    // }
+  constructor() {
+    super();
+    this.state = {
+      campus:[]
+    }
+  }
+    async componentDidMount () {
+      try{
+        let {data} = await axios.get(`https://campus-manager-api.herokuapp.com/campuses/${this.props.match.params.id}`)
+        this.setState({
+          campus:data[0]
+        })
+        console.log(data)
+      }
+      catch(err){
+        console.log(err);
+      }
+    }
   render() {
-    console.log(this.props.match.params.id);
+    const {campus} = this.state;
     return (
-        <div>
-            <h1>campus</h1>
+        <div className="container">
+            <h1>{campus.name}</h1>
+            <div className="img">
+              <img src={campus.image}></img>
+            </div>
+            <div className="description">
+              <p>{campus.description}</p>
+            </div>
+            <div className="students">
+              <p>students</p>
+            </div>
         </div>
     );
   }

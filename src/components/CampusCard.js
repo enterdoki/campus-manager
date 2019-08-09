@@ -1,33 +1,38 @@
 import React, { useState } from 'react';
 import '../styles/CampusCard.css';
 import {Link} from 'react-router-dom';
-import PopUp from './PopUp';
+import EditCampusPopUp from './EditCampusPopUp';
 
-function CampusCard ({image,campus,id,deleteCampus}){
+function CampusCard ({campus,deleteCampus,handleChange,handleSubmit}){
     const [clicked, setClicked] = useState(false);
-    console.log(image)
+    let handleEdit = () =>{
+        setClicked(false);
+        handleSubmit(campus.id);
+    }
     return(
         <div className="Card">
             <div className="image">
-                <img src={image}></img>
+                <img src={campus.image}></img>
             </div>
             <div className="bottom">
                 <div className="top-left">
-                    <Link to={`/campus/${id}`}>
-                        {campus}
+                    <Link to={`/campus/${campus.id}`}>
+                        {campus.name}
                     </Link>
                 </div>
                 <div className="bottom-left">
                     <button onClick={() => setClicked(true)}>Edit</button>
                     {clicked? (<div>
-                        <PopUp
+                        <EditCampusPopUp
+                        campus={campus}
                         close={() => setClicked(false)}
-                        campus={campus} 
+                        handleChange={handleChange}
+                        submit={handleEdit}
                         />
                     </div>):(<div></div>)}
                 </div>
                 <div className="bottom-right">
-                    <button onClick={()=>deleteCampus(id)}>Delete</button>
+                    <button onClick={()=>deleteCampus(campus.id)}>Delete</button>
                 </div>
             </div>
         </div>

@@ -1,6 +1,8 @@
+const axios = require('axios');
 const FETCH_CAMPUS = "FETCH_CAMPUS";
 const DELETE_CAMPUS = "DELETE_CAMPUS";
-const ADD_CAMPUS = "ADD_CAMPUS"
+const ADD_CAMPUS = "ADD_CAMPUS";
+const EDIT_CAMPUS = "EDIT_CAMPUS";
 
 const fetchAllCampus = (campus) => {
     return{
@@ -17,76 +19,60 @@ const removeCampus = (id) =>{
     }
 }
 
-const addCampus = () =>{
-    const arr = {
-            "campusId": 4,
-            "campus": "Hunter College",
-            "email": "jerryjingle@bells.com",
-            "imageUrl": "http://i.imgur.com/AItCxSs.jpg",
-            "gpa": null,
-            "createdAt": "2018-12-06T19:58:21.314Z",
-            "updatedAt": "2018-12-06T19:58:21.314Z",
-    }
+const addCampus = (arr) =>{
     return {
         type: ADD_CAMPUS,
         payload: arr
     }
 }
-export const deleteCampusThunk = (id) => (dispatch) =>{
-    dispatch(removeCampus(id));
+
+const editCampus = (arr) => {
+    return{
+        type: EDIT_CAMPUS,
+        payload: arr
+    }
 }
-export const addCampusThunk = () => (dispatch) =>{
-    dispatch(addCampus());
+
+export const deleteCampusThunk = (id) => async(dispatch) =>{
+    try{
+        await axios.delete(`https://campus-manager-api.herokuapp.com/campuses/${id}`);
+        dispatch(removeCampus(id));
+    }catch(err){
+        console.log(err);
+    }
 }
-export const fetchAllCampusThunk = () => (dispatch) =>{
-    const arrayOfCampusFromApi = [
-        {
-            "campusId": 4,
-            "campus": "Hunter College",
-            "email": "jerryjingle@bells.com",
-            "imageUrl": "http://i.imgur.com/AItCxSs.jpg",
-            "gpa": null,
-            "createdAt": "2018-12-06T19:58:21.314Z",
-            "updatedAt": "2018-12-06T19:58:21.314Z",
-        },
-        {
-            "campusId": 7,
-            "campus": "Stony brook",
-            "email": "jerryjingle@bells.com",
-            "imageUrl": "http://i.imgur.com/AItCxSs.jpg",
-            "gpa": null,
-            "createdAt": "2018-12-06T19:58:21.314Z",
-            "updatedAt": "2018-12-06T19:58:21.314Z",
-        },
-        {
-            "campusId": 1,
-            "campus": "Queens College",
-            "email": "jerryjingle@bells.com",
-            "imageUrl": "http://i.imgur.com/AItCxSs.jpg",
-            "gpa": null,
-            "createdAt": "2018-12-06T19:58:21.314Z",
-            "updatedAt": "2018-12-06T19:58:21.314Z",
-        },
-        {
-            "campusId": 5,
-            "campus": "Bronx College",
-            "email": "jerryjingle@bells.com",
-            "imageUrl": "http://i.imgur.com/AItCxSs.jpg",
-            "gpa": null,
-            "createdAt": "2018-12-06T19:58:21.314Z",
-            "updatedAt": "2018-12-06T19:58:21.314Z",
-        },
-        {
-            "campusId": 2,
-            "campus": "NYU",
-            "email": "jerryjingle@bells.com",
-            "imageUrl": "http://i.imgur.com/AItCxSs.jpg",
-            "gpa": null,
-            "createdAt": "2018-12-06T19:58:21.314Z",
-            "updatedAt": "2018-12-06T19:58:21.314Z",
-        },
-    ]
-    dispatch(fetchAllCampus(arrayOfCampusFromApi));
+
+export const addCampusThunk = (arr) => async(dispatch) =>{
+    try{
+        let {data} = await axios.post("https://campus-manager-api.herokuapp.com/campuses",arr);
+        let campus = await data
+        dispatch(addCampus(campus));
+        console.log(data);
+    }
+    catch(err){
+        console.log(err);
+    }
+ //   dispatch(addCampus(arr));
+}
+
+export const fetchAllCampusThunk = () => async(dispatch) =>{
+    try{
+        let data = await axios.get("https://campus-manager-api.herokuapp.com/campuses");
+        dispatch(fetchAllCampus(data.data));
+        console.log(data);
+    }catch(err){
+        console.log(err);
+    }
+}
+
+export const editCampusThunk = (id,arr) =>async(dispatch)=>{
+    try{
+        let data = await axios.put(`https://campus-manager-api.herokuapp.com/campuses/${id}`,arr);
+        dispatch(editCampus(arr));
+        console.log(data);
+    }catch(err){
+        console.log(err);
+    }
 }
 
 export default (state = [], action) =>{  
@@ -94,9 +80,11 @@ export default (state = [], action) =>{
         case FETCH_CAMPUS:
             return action.payload;
         case DELETE_CAMPUS:
-            return state.filter(campus=>campus.campusId !== action.payload)
+            return state.filter(item => item.id !== action.payload);
         case ADD_CAMPUS:
             return [...state, action.payload];
+        case EDIT_CAMPUS:
+            return [...state.filter(item => item.id !== action.payload.id), action.payload];
         default:
             return state;
     }

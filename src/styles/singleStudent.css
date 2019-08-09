@@ -1,0 +1,32 @@
+.img{
+    position: absolute;
+    width: 50%;
+    height: 50%;
+
+}
+.img img{
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+    height: 50%;
+}
+
+.description{
+    width: 50%;
+    height: 50%;
+    float: right;
+}
+.description p{
+    width: 80%;
+    word-wrap: break-word; 
+}
+
+.students{
+    width: 80%;
+    height: 50%;
+    position: absolute;
+    bottom: 5vh;
+    left: 50%;
+    margin-left:-40%;
+    border:1px solid #021a40;
+}
