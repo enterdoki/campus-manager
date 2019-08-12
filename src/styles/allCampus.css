@@ -18,9 +18,20 @@ h1{
 }
 
 .title {
-    background-color: #003399;
+    background-color:#2c2c2c;
     color: white;
-    font-size: 1.05rem;
-    margin: 0;
-    padding: 0rem;
+    font-size: .85rem;
+    padding-top: .5px;
+    padding-bottom: .5px;
+}
+
+button {
+    margin-top: 7px;
+    margin-right: 5px;
+    background-color:#2c2c2c;
+    border: 10px;
+    color: white;
+    font-size: 15px;
+    padding: 5px 15px;
+    border-radius: 5px;
 }

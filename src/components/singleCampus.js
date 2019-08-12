@@ -65,10 +65,8 @@ class SingleCampus extends Component {
           <p>{campus.description}</p>
         </div>
         <div className="students">
-          <h1>Students</h1>
-          <div className="display">
-            {this.display()}
-          </div>
+          <h2>Students</h2>
+          <p>{this.display()}</p>
         </div>
       </div>
     );

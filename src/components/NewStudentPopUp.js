@@ -80,28 +80,10 @@ class NewStudentPopUp extends Component {
                         </MenuItem>
                         ))}
                     </TextField>
-                        <Button
-                        variant="contained"
-                        size="large"
-                        color="primary"
-                        onClick={this.handleSubmit}
-                        style = {{position: "absolute",
-                            bottom: 5,
-                            right: 105}}
-                        >
-                            Submit
-                        </Button>
-                        <Button
-                        variant="contained"
-                        size="large"
-                        color="primary"
-                        onClick={this.props.close}
-                        style = {{position: "absolute",
-                            bottom: 5,
-                            right: 5}}
-                        >
-                            Close
-                        </Button>
+                        <div className="button">
+                            <button onClick={this.handleSubmit}>Submit</button>
+                            <button onClick={this.props.close}>Close</button>
+                        </div>
                     </div>
                 </div>
             </div>

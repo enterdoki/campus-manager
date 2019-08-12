@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import {Link} from 'react-router-dom';
 import NewCampusPopUp from './NewCampusPopUp';
 
+
 // Additional Redux store imports;
 import { connect } from "react-redux";
 import {fetchAllCampusThunk, deleteCampusThunk, addCampusThunk, editCampusThunk} from '../store/utilities/allCampus';
@@ -73,7 +74,9 @@ class allCampus extends Component {
   render() {
     return (
         <div> 
-          <div className = "title"><h1>Campus Listing</h1></div>
+          <div className = "title">
+            <h1>Campus Manger</h1>
+          </div>
           <Link to="/students"><button>Students</button></Link>
           <button onClick={this.toggleEdit}> Add Campus </button>
             {this.state.addCampus? 
