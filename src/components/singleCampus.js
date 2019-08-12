@@ -31,9 +31,9 @@ class SingleCampus extends Component {
     }
   }
 
-  removeStudent = (id) => {
-    this.props.removeStudent(id);
-
+  removeStudent = async(id) => {
+    await this.props.removeStudent(id);
+    this.fetchSingleCampus();
 }
 
   display = () =>(
@@ -65,7 +65,10 @@ class SingleCampus extends Component {
           <p>{campus.description}</p>
         </div>
         <div className="students">
-          <p>{this.display()}</p>
+          <h1>Students</h1>
+          <div className="display">
+            {this.display()}
+          </div>
         </div>
       </div>
     );
