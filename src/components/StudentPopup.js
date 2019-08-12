@@ -4,14 +4,6 @@ import { Button } from "@material-ui/core";
 import MenuItem from "@material-ui/core/MenuItem";
 import "../styles/StudentPopup.css"
 
-let campuses = [
-    { label: "Hunter College", value: "Hunter College" },
-    { label: "Queens College", value: "Queens College" },
-    { label: "Stony Brook", value: "Stony Brook" },
-    { label: "Bronx College", value: "Bronx College" },
-    { label: "NYU", value: "NYU" },
-    { label: "City College", value: "City College" }
-  ];
 
 class StudentPopup extends Component {
     constructor(props){  
@@ -20,7 +12,6 @@ class StudentPopup extends Component {
             category: ""
         };  
     }  
-
 
     handleChange = name => ({ target }) =>{
         this.setState({ 
@@ -34,8 +25,18 @@ class StudentPopup extends Component {
         });
     }
 
-    handleChange = () =>{
-        
+    handleSubmit = () =>{
+        const arr= {
+            "firstname":this.state.firstName,
+            "lastname":this.state.lastName,
+            "gpa": parseInt(this.state.gpa),
+            "email":this.state.email,
+            "image": "http://i.imgur.com/AItCxSs.jpg",
+            "campusId": this.state.category
+          }
+          console.log(arr);
+          this.props.editStudent(this.props.id,arr);
+          this.props.closePopup();
     }
 
     render () {

@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import {Link} from 'react-router-dom';
 import StudentsCard from "../components/allStudentsCard"
 import NewCampusPopUp from './NewStudentPopUp'
-import { fetchAllStudentsThunk, removeStudentThunk, addStudentThunk } from "../store/utilities/allStudents";
+import { fetchAllStudentsThunk, removeStudentThunk, addStudentThunk, editStudentThunk } from "../store/utilities/allStudents";
 import {fetchAllCampusThunk} from '../store/utilities/allCampus';
 import '../styles/allStudents.css'
 
@@ -40,6 +40,7 @@ class allStudents extends Component {
             campusId = {item.campusid}
             removeStudent={this.props.removeStudent}
             campuses={this.props.campuses}
+            editStudent={this.props.editStudent}
             />
           )
         })
@@ -105,7 +106,8 @@ const mapDispatch = (dispatch) => {
         fetchAllStudents: () => dispatch(fetchAllStudentsThunk()),
         removeStudent: (id) => dispatch(removeStudentThunk(id)),
         addStudent: (student) => dispatch(addStudentThunk(student)),
-        fetchAllCampus: () => dispatch(fetchAllCampusThunk())
+        fetchAllCampus: () => dispatch(fetchAllCampusThunk()),
+        editStudent: (id,arr) => dispatch(editStudentThunk(id,arr))
     }
 }
 
