@@ -32,17 +32,23 @@ class StudentsCard extends Component {
                         
                     </div>
                     <div className="bottom-left">
+                        {this.props.editStudent ? (
+                        <div>
                         <button onClick={this.handlePopup}>Edit</button>  
-                        {this.state.showPopup ? (
-                            <Popup 
-                            firstName = {this.props.firstName} 
-                            lastName = {this.props.lastName}  
-                            closePopup={this.handlePopup} 
-                            campuses={this.props.campuses}
-                            editStudent={this.props.editStudent}
-                            id={this.props.id}
-                            />
-                        ): (null) }
+                            {this.state.showPopup ? (
+                                <Popup 
+                                firstName = {this.props.firstName} 
+                                lastName = {this.props.lastName}  
+                                closePopup={this.handlePopup} 
+                                campuses={this.props.campuses}
+                                editStudent={this.props.editStudent}
+                                id={this.props.id}
+                                />
+                            )
+                        : (null) }
+                        </div>
+                        ): (<div></div>)}
+
                         
                     </div>
                     <div className="bottom-right">

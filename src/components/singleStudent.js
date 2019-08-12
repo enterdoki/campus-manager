@@ -34,7 +34,7 @@ class Student extends Component {
               <div className="description">
                 <p>placeholder</p>
               </div>
-              <div className="students">
+              <div className="campus">
                 <p>school</p>
               </div>
           </div>
