@@ -20,9 +20,7 @@ class StudentsCard extends Component {
         return(
             <div className="Card">
                 <div className="image">
-                    <Link to={`/campus/${this.props.campusId}`}>
-                        <img src={this.props.image}></img>
-                    </Link>
+                    <img src={this.props.image}></img>
                 </div>
                 <div className="bottom">
                     <div className="top-left">
