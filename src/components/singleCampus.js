@@ -1,13 +1,16 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import StudentsCard from "./allStudentsCard"
+import { connect } from 'react-redux';
+import {removeStudentThunk} from "../store/utilities/allStudents";
 import '../styles/singleCampus.css'
 
 class SingleCampus extends Component {
   constructor() {
     super();
     this.state = {
-      campus: []
+      campus: [],
+      students: []
     }
   }
   async componentDidMount() {
@@ -18,7 +21,8 @@ class SingleCampus extends Component {
     try {
       let { data } = await axios.get(`https://campus-manager-api.herokuapp.com/campuses/${this.props.match.params.id}/students`)
       this.setState({
-        campus: data
+        campus: data,
+        students: data.students
       })
       console.log(data.students)
     }
@@ -27,18 +31,26 @@ class SingleCampus extends Component {
     }
   }
 
-  // display = () =>(
-  //   this.state.campus.students.map(item=>{
-  //     return (
-  //       <StudentsCard
-  //       image={item.image}
-  //       firstName={item.firstname}
-  //       lastName={item.lastname}
-  //       removeStudent={this.props.removeStudent}
-  //       />
-  //     )
-  //   })
-  // )
+  removeStudent = (id) => {
+    this.props.removeStudent(id);
+
+}
+
+  display = () =>(
+    this.state.students.map(item=>{
+      return (
+        <StudentsCard
+        image={item.image}
+        firstName={item.firstname}
+        lastName={item.lastname}
+        email = {item.email}
+        gpa = {item.gpa}
+        id = {item.id}
+        removeStudent={this.removeStudent}
+        />
+      )
+    })
+  )
 
   render() {
     const { campus } = this.state;
@@ -53,11 +65,24 @@ class SingleCampus extends Component {
           <p>{campus.description}</p>
         </div>
         <div className="students">
-          {/* <p>{this.display()}</p> */}
+          <p>{this.display()}</p>
         </div>
       </div>
     );
   }
 }
 
-export default SingleCampus;
+
+const mapState = (state) => {
+  return {
+      students: state.allStudents
+  }
+}
+
+const mapDispatch = (dispatch) => {
+  return {
+      removeStudent: (id) => dispatch(removeStudentThunk(id))
+  }
+}
+
+export default connect(mapState, mapDispatch)(SingleCampus);
