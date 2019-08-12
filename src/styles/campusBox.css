@@ -1,0 +1,30 @@
+.cambox {
+  display: flex;
+  width: 250px;
+  height: 110px;
+  background-color: antiquewhite;
+  justify-content: space-around;
+  padding: 5px;
+  padding-left: 0;
+  margin: 5px;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
+  border-radius: 2px;
+  align-items: center;
+  text-align: center;
+}
+
+.campic {
+  height: 110px;
+  width: 120px;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
+  border: grey solid 0.3px;
+}
+
+.cambtn {
+  width: 55px;
+  height: 26px;
+  background-color: aqua;
+  height: 24px;
+  margin: 5px 1px;
+  border-radius: 4px;
+}

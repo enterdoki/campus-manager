@@ -1,4 +1,4 @@
-.img{
+/* .img{
     position: absolute;
     width: 50%;
     height: 50%;
@@ -29,5 +29,114 @@
     left: 50%;
     margin-left:-40%;
     border:1px solid #021a40;
+} */
+
+.xl {
+  height: 200px;
+  width: 200px;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
+  border: grey solid 0.8px;
 }
 
+.stuInfo {
+  display: flex;
+  /* background-color: rgb(37, 66, 66); */
+  margin-top: 20px;
+  justify-content: center;
+  align-items: center;
+}
+
+.stubtn {
+  width: 80px;
+  background-color: aqua;
+  height: 24px;
+  margin: 10px 1px;
+  border-radius: 4px;
+}
+
+.change {
+  /* background-color: aqua; */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+select {
+  height: 25px;
+  width: 160px;
+  border-radius: 4px;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2);
+}
+
+.btn2 {
+  width: 130px;
+  /* margin: 15px; */
+  background-color: aqua;
+  margin-left: 12px;
+  height: 24px;
+  margin: 6px;
+  border-radius: 4px;
+}
+.btn3 {
+  width: 120px;
+  background-color: aqua;
+  height: 24px;
+  margin: 10px 1px;
+  border-radius: 4px;
+}
+
+.editstu {
+  height: 200px;
+  width: 400px;
+  background-color: rgba(165, 165, 253, 0.5);
+  /* margin: auto; */
+  display: inline-block;
+  border-radius: 6px;
+  align-items: center;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
+  margin-left: 80px;
+  text-align: center;
+}
+
+.kkk {
+  margin: 15px;
+}
+
+.nameIn {
+  width: 100px;
+  margin-right: 5px;
+}
+
+.cancelbtn {
+  display: flex;
+  justify-content: flex-end;
+  /* background-color: aliceblue; */
+}
+
+.btn6 {
+  background-color: aqua;
+  width: 100px;
+  margin-right: 30px;
+}
+.btn7 {
+  background-color: aqua;
+  width: 130px;
+  margin-left: 1px;
+}
+.btn9 {
+  background-color: aqua;
+  width: 100px;
+  margin: 36px;
+}
+
+h3 {
+  text-align: center;
+}
+
+.t1 {
+  margin-bottom: 50px;
+}
+
+.sbar {
+  margin-left: 6%;
+}

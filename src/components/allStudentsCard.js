@@ -1,6 +1,9 @@
-import React, {Component} from "react";
-import {Link} from 'react-router-dom';
+import React, { Component } from "react";
+import { Link } from "react-router-dom";
 import Popup from "./StudentPopup";
+import { connect } from "react-redux";
+import { selectstudent } from "../store/utilities/targetStudent-reducer";
+import { selectcampus } from "../store/utilities/targetCampus-reducer";
 import "../styles/allStudentsCard.css"
 
 class StudentsCard extends Component { 
@@ -16,6 +19,22 @@ class StudentsCard extends Component {
             showPopup: !this.state.showPopup
         });
     }
+    
+  select = () => {
+    this.props.selectstudent(this.props.student);
+    // console.log(this.props.student);
+    // console.log(this.props.campuses);
+    let cams = this.props.campuses;
+    console.log(cams, "heyheyhey");
+    for (let i = 0; i < cams.length; i++) {
+      console.log(this.props.student);
+      if (cams[i].campusId == this.props.student.campusId) {
+        console.log(cams[i]);
+        this.props.selectcampus(cams[i]);
+        return;
+      }
+    }   
+    }
     render () {
         return(
             <div className="Card">
@@ -26,7 +45,7 @@ class StudentsCard extends Component {
                 </div>
                 <div className="bottom">
                     <div className="top-left">
-                        <Link to={`/students/${this.props.id}`}>
+                        <Link to={`/students/${this.props.id}`} onClick={this.select}>
                             {this.props.firstName} {this.props.lastName}
                         </Link>
                         
@@ -58,7 +77,27 @@ class StudentsCard extends Component {
             </div>
         )
     }
-    
-}
+    // this.props.selectcampus(null);
 
-export default StudentsCard;
+    // setTimeout(() => {
+    //   console.log(this.props.tarcam);    ???????
+    // }, 2000);
+  };
+
+ 
+const mapState = state => {
+  return {
+    campuses: state.allCampus
+    // tarcam: state.targetCam
+  };
+};
+
+const mapAction = {
+  selectstudent,
+  selectcampus
+};
+
+export default connect(
+  mapState,
+  mapAction
+)(StudentsCard);
