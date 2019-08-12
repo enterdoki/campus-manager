@@ -46,9 +46,16 @@ export const removeStudentThunk = (id) => async(dispatch) => {
     }
 }
 
-export const addStudentThunk = (student) => (dispatch) => {
-    let resolvedActionObject = addStudent(student); 
-    dispatch(resolvedActionObject);
+export const addStudentThunk = (arr) => async(dispatch) =>{
+    try{
+        let {data} = await axios.post("https://campus-manager-api.herokuapp.com/students",arr);
+        let student = await data
+        dispatch(addStudent(student));
+        console.log(data);
+    }
+    catch(err){
+        console.log(err);
+    }
 }
 
 // REDUCER FUNCTION;

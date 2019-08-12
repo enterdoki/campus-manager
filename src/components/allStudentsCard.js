@@ -37,7 +37,7 @@ class StudentsCard extends Component {
                     <div className="bottom-left">
                         <button onClick={this.handlePopup}>Edit</button>  
                         {this.state.showPopup ? (
-                            <Popup firstName = {this.props.firstName} lastName = {this.props.lastName}  closePopup={this.handlePopup}/>
+                            <Popup firstName = {this.props.firstName} lastName = {this.props.lastName}  closePopup={this.handlePopup} campuses={this.props.campuses}/>
                         ): (null) }
                         
                     </div>

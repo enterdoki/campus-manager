@@ -21,23 +21,23 @@ class StudentPopup extends Component {
         };  
     }  
 
-    // handlefirstNameChange = event => {
-    //     this.setState({
-    //         firstName = event.target.value
-    //     });
-    // }
 
-    // handlelastNameChange = event => {
-    //     this.setState({
-    //         lastName = event.target.value
-    //     });
-    // }
+    handleChange = name => ({ target }) =>{
+        this.setState({ 
+          [name]: target.value
+        }); 
+      }
 
     handleCategory = event => {
         this.setState({
             category :event.target.value
         });
     }
+
+    handleChange = () =>{
+        
+    }
+
     render () {
         return (
             <div className = "popup">
@@ -46,7 +46,7 @@ class StudentPopup extends Component {
                 helperText="Please enter your first name"
                 label="First Name"
                 // value={this.state.name}
-                // onChange={this.handleChange("name")}
+                onChange={this.handleChange("firstName")}
                 margin="normal"
                 variant="outlined"
                 style = {{marginLeft: 10, width: 500}}
@@ -55,7 +55,7 @@ class StudentPopup extends Component {
                 helperText="Please enter your last name"
                 label="Last Name"
                 // value={this.state.name}
-                // onChange={this.handleChange("name")}
+                onChange={this.handleChange("lastName")}
                 margin="normal"
                 variant="outlined"
                 style = {{marginLeft: 5, width: 500}}
@@ -64,7 +64,7 @@ class StudentPopup extends Component {
                 helperText="Please enter your email address"
                 label="Email"
                 // value={this.state.name}
-                // onChange={this.handleChange("name")}
+                onChange={this.handleChange("email")}
                 margin="normal"
                 variant="outlined"
                 style = {{marginLeft: 10, width: 500}}
@@ -72,34 +72,34 @@ class StudentPopup extends Component {
                 <TextField
                 label="GPA"
                 // value={this.state.name}
-                // onChange={this.handleChange("name")}
+                onChange={this.handleChange("gpa")}
                 helperText="Please select a GPA"
                 margin="normal"
                 variant="outlined"
                 style = {{marginLeft: 10}}
                 />
-                <TextField
-                select
-                label="Select a campus"
-                value={this.state.category}
-                onChange={this.handleCategory}
-                SelectProps={{}}
-                helperText="Please select a campus"
-                margin="normal"
-                variant="outlined"
-                style = {{marginLeft: 10}}
-                >
-                {campuses.map(option => (
-                    <MenuItem key={option.value} value={option.value}>
-                        {option.label}
-                    </MenuItem>
-                    ))}
-                 </TextField>
+                    <TextField
+                    select
+                    label="Select a campus"
+                    value={this.state.category}
+                    onChange={this.handleCategory}
+                    SelectProps={{}}
+                    helperText="Please select a campus"
+                    margin="normal"
+                    variant="outlined"
+                    style = {{marginLeft: 10}}
+                    >
+                    {this.props.campuses.map(option => (
+                        <MenuItem key={option.name} value={option.id}>
+                            {option.name}
+                        </MenuItem>
+                        ))}
+                    </TextField>
                     <Button
                     variant="contained"
                     size="large"
                     color="primary"
-                    onClick={this.props.closePopup}
+                    onClick={this.handleSubmit}
                     style = {{position: "absolute",
                         bottom: 5,
                         right: 105}}

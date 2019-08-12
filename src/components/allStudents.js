@@ -2,7 +2,9 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import {Link} from 'react-router-dom';
 import StudentsCard from "../components/allStudentsCard"
+import NewCampusPopUp from './NewStudentPopUp'
 import { fetchAllStudentsThunk, removeStudentThunk, addStudentThunk } from "../store/utilities/allStudents";
+import {fetchAllCampusThunk} from '../store/utilities/allCampus';
 import '../styles/allStudents.css'
 
 
@@ -10,12 +12,13 @@ class allStudents extends Component {
     constructor() {
         super();
         this.state = {
-            
+            addStudent: false
         }
       }
 
     componentDidMount() {
         this.props.fetchAllStudents();
+        this.props.fetchAllCampus();
     }
 
     removeStudent = (id) => {
@@ -36,17 +39,52 @@ class allStudents extends Component {
             id={item.id}
             campusId = {item.campusid}
             removeStudent={this.props.removeStudent}
+            campuses={this.props.campuses}
             />
           )
         })
       )
+
+      handleChange = name => ({ target }) =>{
+        this.setState({ 
+          [name]: target.value
+        }); 
+      }
+      
+      handleNew = (id) =>{
+        const arr= {
+          "firstname":this.state.firstName,
+          "lastname":this.state.lastName,
+          "gpa": parseInt(this.state.gpa),
+          "email":this.state.email,
+          "image": "http://i.imgur.com/AItCxSs.jpg",
+          "campusId": id
+        }
+        console.log(arr);
+        this.props.addStudent(arr);
+        this.toggleEdit();
+      }  
+
+      toggleEdit=()=>{
+        this.setState({
+          addStudent: !this.state.addStudent
+        })
+      }
 
     render() {
         return (
             <div className = "main">
                 <div className = "title"><h1>Students</h1></div>
                 <Link to="/"><button>Campuses</button></Link>
-                <button onClick = {() => this.addStudent(studentToAdd)}>Add Student</button>
+                <button onClick={this.toggleEdit}> Add Student </button>
+                {this.state.addStudent? 
+                (<NewCampusPopUp 
+                    close={this.toggleEdit}
+                    submit={this.handleNew}
+                    handleChange={this.handleChange}
+                    campuses={this.props.campuses}
+                />)
+                :(<div></div>)}
                 <div className = "card">
                     {this.display()}
                 </div>
@@ -57,7 +95,8 @@ class allStudents extends Component {
 
 const mapState = (state) => {
     return {
-        students: state.allStudents
+        students: state.allStudents,
+        campuses: state.allCampus
     }
 }
 
@@ -65,16 +104,9 @@ const mapDispatch = (dispatch) => {
     return {
         fetchAllStudents: () => dispatch(fetchAllStudentsThunk()),
         removeStudent: (id) => dispatch(removeStudentThunk(id)),
-        addStudent: (student) => dispatch(addStudentThunk(student))
+        addStudent: (student) => dispatch(addStudentThunk(student)),
+        fetchAllCampus: () => dispatch(fetchAllCampusThunk())
     }
-}
-
-const studentToAdd = {
-    "id": 2,
-    "firstname": "bob",
-    "lastname": "jones",
-    "email": "bobbyboy1234@yahoo.com",
-    "image": "https://i.imgur.com/GuAB8OE.jpg",
 }
 
 export default connect(mapState, mapDispatch)(allStudents);
