@@ -3,6 +3,7 @@ const axios = require('axios');
 const FETCH_STUDENTS = "FETCH_STUDENTS";
 const REMOVE_STUDENT = "REMOVE_STUDENT";
 const ADD_STUDENT = "ADD_STUDENT";
+const EDIT_STUDENT = "EDIT_STUDENT"
 
 // ACTION CREATOR;
 const fetchAllStudents = (students) => {
@@ -23,6 +24,14 @@ const addStudent = (student) => {
     return {
         type: ADD_STUDENT,
         payload: student
+    }
+}
+
+const editStudent = (id,arr) => {
+    return{
+        type: EDIT_STUDENT,
+        id: id,
+        payload: arr
     }
 }
 
@@ -58,6 +67,16 @@ export const addStudentThunk = (arr) => async(dispatch) =>{
     }
 }
 
+export const editStudentThunk = (id,arr) =>async(dispatch)=>{
+    try{
+        let data = await axios.put(`https://campus-manager-api.herokuapp.com/students/${id}`,arr);
+        dispatch(editStudent(id,arr));
+        console.log(data);
+    }catch(err){
+        console.log(err);
+    }
+}
+
 // REDUCER FUNCTION;
 export default (state = [], action) => {
     switch (action.type) {
@@ -67,6 +86,8 @@ export default (state = [], action) => {
             return state.filter(student => student.id !== action.payload);
         case ADD_STUDENT:
             return [...state, action.payload]
+        case EDIT_STUDENT:
+            return [...state.filter(item => item.id !== action.id), action.payload];
         default:
             return state;
     }
