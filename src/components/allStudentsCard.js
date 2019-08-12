@@ -24,9 +24,6 @@ class StudentsCard extends Component {
                         <img src={this.props.image}></img>
                     </Link>
                 </div>
-                <div className="bottom-left">
-                    Edit
-                </div>
                 <div className="bottom">
                     <div className="top-left">
                         <Link to={`/students/${this.props.id}`}>

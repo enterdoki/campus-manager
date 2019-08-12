@@ -1,43 +1,88 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import axios from 'axios';
+import StudentsCard from "./allStudentsCard"
+import { connect } from 'react-redux';
+import {removeStudentThunk} from "../store/utilities/allStudents";
 import '../styles/singleCampus.css'
 
 class SingleCampus extends Component {
   constructor() {
     super();
     this.state = {
-      campus:[]
+      campus: [],
+      students: []
     }
   }
-    async componentDidMount () {
-      try{
-        let {data} = await axios.get(`https://campus-manager-api.herokuapp.com/campuses/${this.props.match.params.id}`)
-        this.setState({
-          campus:data[0]
-        })
-        console.log(data)
-      }
-      catch(err){
-        console.log(err);
-      }
+  async componentDidMount() {
+    this.fetchSingleCampus();
+  }
+
+  async fetchSingleCampus() {
+    try {
+      let { data } = await axios.get(`https://campus-manager-api.herokuapp.com/campuses/${this.props.match.params.id}/students`)
+      this.setState({
+        campus: data,
+        students: data.students
+      })
+      console.log(data.students)
     }
+    catch(err) {
+      console.log(err);
+    }
+  }
+
+  removeStudent = (id) => {
+    this.props.removeStudent(id);
+
+}
+
+  display = () =>(
+    this.state.students.map(item=>{
+      return (
+        <StudentsCard
+        image={item.image}
+        firstName={item.firstname}
+        lastName={item.lastname}
+        email = {item.email}
+        gpa = {item.gpa}
+        id = {item.id}
+        removeStudent={this.removeStudent}
+        />
+      )
+    })
+  )
+
   render() {
-    const {campus} = this.state;
+    const { campus } = this.state;
+
     return (
-        <div className="container">
-            <h1>{campus.name}</h1>
-            <div className="img">
-              <img src={campus.image}></img>
-            </div>
-            <div className="description">
-              <p>{campus.description}</p>
-            </div>
-            <div className="students">
-              <p>students</p>
-            </div>
+      <div className="container">
+        <h1>{campus.name}</h1>
+        <div className="img">
+          <img src={campus.image}></img>
         </div>
+        <div className="description">
+          <p>{campus.description}</p>
+        </div>
+        <div className="students">
+          <p>{this.display()}</p>
+        </div>
+      </div>
     );
   }
 }
 
-export default SingleCampus;
+
+const mapState = (state) => {
+  return {
+      students: state.allStudents
+  }
+}
+
+const mapDispatch = (dispatch) => {
+  return {
+      removeStudent: (id) => dispatch(removeStudentThunk(id))
+  }
+}
+
+export default connect(mapState, mapDispatch)(SingleCampus);
